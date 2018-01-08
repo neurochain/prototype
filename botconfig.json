@@ -1,0 +1,18 @@
+{
+  "botID": "fromconfig",
+  "debugMode":  false,
+  "database": {
+    "objects": "objectsdb",
+    "blockchain": "blockchaindb",
+    "remoteObjectDB": "remoteobjectdb",
+    "remoteBlockchainDB": "remoteblockchaindb",
+    "remoteServerURL": "http://localhost:5984/"
+  },
+  "mailTextSeparator": " ",
+  "socket": {
+    "ip": "127.0.0.1",
+    "authorized": true,
+    "listeningPort": 5000,
+    "sendingPort": 12345
+  }
+}

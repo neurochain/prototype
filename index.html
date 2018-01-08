@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>NeuroChain Node Activity</title>    
+</head>
+<body>
+    <h2>Connected to my local bot</h2>    
+    <section id="serverStats">
+        <h3>Configuration</h3>
+        <table>
+            <tr>
+                <td>NeuroBot Id</td>
+                <td>ABCDE</td>
+                <td>Communication Channel</td>
+                <td>UDP</td>
+            </tr>
+            <tr>
+                <td>Listening Port</td>
+                <td>5000</td>               
+                <td>Sending Port</td>
+                <td>12345</td>
+            </tr>
+            <tr>
+                <td>Seed IP</td>
+                <td>2</td>
+                <td>Seed Listening Port3</td>
+                <td>4</td>
+            </tr>
+           
+
+        </table>
+    </section>
+    <h3>Logs</h3>
+    <section id="serverActivity"><h3>Logs</h3></section>
+  
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:8080');
+        socket.on('message', function (message) {
+            if (typeof (message) == 'string') { addMessage(message); }
+            else { for (mess of message) { addMessage(mess); } }
+        })        
+        function addMessage(message) {
+            var actM = document.createTextNode(message);          
+            var br = document.createElement("br");
+            //document.getElementById("serverActivity").appendChild(br);
+            //document.getElementById("serverActivity").appendChild(actM);
+            document.getElementById("serverActivity").prepend(br);
+            document.getElementById("serverActivity").prepend(actM);
+        }
+    </script>
+</body>
+</html>

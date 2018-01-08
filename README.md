@@ -2,4 +2,4 @@
 
 
 ## First public version of our sandbox prototype
-## future of blockchains coming soon...
+_Future of blockchains coming soon..._

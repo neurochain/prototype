@@ -1,4 +1,4 @@
-﻿# Botchain
+﻿# NeuroChain 
 
 
 ## First public version of our sandbox prototype

@@ -69,13 +69,13 @@ function launchRandomBlock() {
     }, delay * 1000);
   } else {
     // Select randomly transactions from availables
-    logger.log(LOG_BLK, 'Available trx : ' + global.transactionsMap.size); // TODO : configure text
+    logger.log(LOG_BLK, 'Available trx : ' + global.transactionsMap.size);
     var transactionToBlockMap = new Map();
     var trxs = Array.from(global.transactionsMap.values());
     while (transactionToBlockMap.size < threshold) {
       var tmpTrx = trxs[Math.floor(Math.random() * trxs.length)];
       transactionToBlockMap.set(tmpTrx.id, tmpTrx);
-      logger.log(LOG_BLK, 'trx selected : ' + tmpTrx.id + '    ' + 'all selected : ' + transactionToBlockMap.size); 
+      logger.log(LOG_BLK, 'trx selected : ' + tmpTrx.id + '    ' + 'all selected : ' + transactionToBlockMap.size);
     }
 
     // Create the full block Object
@@ -106,7 +106,7 @@ function launchRandomBlock() {
 // Each receivers validate the block by ckecking if all transaction contained in are ok
 // Submitted block is flagged with the last enchained block id. It permits to easily put aside blocks too old.
 function manageNewBlock(block) {
-  logger.log(LOG_BLK, '------ Receiving New temp Block'); // TODO : configure text
+  logger.log(LOG_BLK, 'New temp Block received');
   // is block id exist ? emetter is not up to date with the blockchain
   var existingBlocks = global.blocksMap.keys();
   if (global.blocksMap.get(block.blockID) != null) {

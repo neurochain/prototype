@@ -20,7 +20,7 @@ function broadcastMessage(message) {
     message.emetter = global.localBot;
     receiverMap = new Map();
 
-    var threshold = 100;
+    var threshold = global.cfg.percentBroadcast;
     var botsValues = Array.from(global.botsMap.values());
     var numberToSelect = Math.floor(threshold * global.botsMap.size / 100);
     logger.log(LOG_COM,'Number of bots to select: ' + numberToSelect);

@@ -103,7 +103,7 @@ proposedStock = new Map();
 proposedSold = new Map();
 
 function createProducingBusiness(seedTrx) {
-    if (i > 10) {
+    if (i > global.cfg.businessTotalTrx) {
         return;
     }
     i += 1;

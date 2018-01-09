@@ -14,5 +14,8 @@
     "listeningPort": 5000,
     "sendingPort": 12345
   },
-  "trxPerBlock" : 5
+  "trxPerBlock" : 5,
+  "percentBroadcast" : 100,
+  "businessTotalTrx" : 15
+
 }

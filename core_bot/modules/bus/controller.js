@@ -8,34 +8,27 @@ randomString = require('randomstring'),
 H = require('../../utils/helper');
 
 function Controller() {
-     bus.eventBus.on(SECMGR_CTRL_VALIDATED_MESSAGE, function (message) { logger.log('debug', 'message validated - worker'); processMessage(message); });
-     bus.eventBus.on(MINER_CTRL_TRANSACTION_OK, function (message) { bus.eventBus.sendEvent(CTRL_TRXMGR_PROCESS, message); });
-     bus.eventBus.on(CSNMGR_CTRL_SEND_MESSAGE, function (message) { bus.eventBus.sendEvent(CTRL_SECMGR_SIGN_TO_SEND_MESSAGE, message); });
-     bus.eventBus.on(CSNMGR_CTRL_BACKUP_BLOCK, function (block) { bus.eventBus.sendEvent(CTRL_HISTMGR_BACKUP_BLOCK, block); });
-     bus.eventBus.on(CSNMGR_CTRL_CHECK_BLOCK, function (block) { bus.eventBus.sendEvent(CTRL_BIZMGR_CHECK_BLOCK, block); });
-     bus.eventBus.on(CSNMGR_CTRL_CLEAN_BLOCKLIST, function () { bus.eventBus.sendEvent(CTRL_BLKMGR_CLEAN_BLOCKLIST); });
-     bus.eventBus.on(CSNMGR_CTRL_BROADCAST, function (message) { bus.eventBus.sendEvent(CTRL_SECMGR_SIGN_TO_BROADCAST, message); });
-     bus.eventBus.on(NTKMGR_CTRL_SEND_MESSAGE, function (message) { bus.eventBus.sendEvent(CTRL_SECMGR_SIGN_TO_SEND_MESSAGE, message); });
-     bus.eventBus.on(NTKMGR_CTRL_BROADCAST, function (message) { bus.eventBus.sendEvent(CTRL_SECMGR_SIGN_TO_BROADCAST, message); });
-     bus.eventBus.on(NTKMGR_CTRL_SHARE_TRX, function (bot) { bus.eventBus.sendEvent(CTRL_TRXMGR_SHARE, bot); });
-     bus.eventBus.on(NTKMGR_CTRL_SHARE_BLK, function (bot) { bus.eventBus.sendEvent(CTRL_BLKMGR_SHARE, bot); });
-     bus.eventBus.on(TRXMGR_CTRL_BROADCAST, function (message) { bus.eventBus.sendEvent(CTRL_SECMGR_SIGN_TO_BROADCAST, message); });
-     bus.eventBus.on(TRXMGR_CTRL_SEND_MESSAGE, function (message) { bus.eventBus.sendEvent(CTRL_SECMGR_SIGN_TO_SEND_MESSAGE, message); });
-     bus.eventBus.on(BLKMGR_CTRL_SEND_MESSAGE, function (message) { bus.eventBus.sendEvent(CTRL_SECMGR_SIGN_TO_SEND_MESSAGE, message); });
-     bus.eventBus.on(BLKMGR_CTRL_BROADCAST, function (message) { bus.eventBus.sendEvent(CTRL_SECMGR_SIGN_TO_BROADCAST, message); });
-     bus.eventBus.on(BIZMGR_CTRL_NEW_BIZ, function (bizObject) { bus.eventBus.sendEvent(CTRL_TRXMGR_CREATE_TRX, bizObject); });
-     bus.eventBus.on(TERMMGR_CTRL_SET_CONF, function (conf) { bus.eventBus.sendEvent(CTRL_BIZMGR_SET_CONF, conf) });
-     bus.eventBus.on(TERMMGR_CTRL_START, function () {
-        //START NETWORK
-        bus.eventBus.sendEvent(CTRL_NTKMGR_ASK_REGISTER);
-        // START TRANSACTIONS
-        bus.eventBus.sendEvent(CTRL_BIZMGR_START);
-        // START ELECTORING
-        bus.eventBus.sendEvent(CTRL_CSNMGR_START);
-        // START BLOCKS
-        bus.eventBus.sendEvent(CTRL_BLKMGR_LAUNCH);
-    });
-     bus.eventBus.on(TERMMGR_CTRL_CREATE_TRX, function (seedTrx) { bus.eventBus.sendEvent(CTRL_BIZMGR_CREATE_TRX, seedTrx) });
+      linkEvents(MINER_CTRL_TRANSACTION_OK, CTRL_TRXMGR_PROCESS);
+      linkEvents(CSNMGR_CTRL_SEND_MESSAGE, CTRL_SECMGR_SIGN_TO_SEND_MESSAGE);
+      linkEvents(CSNMGR_CTRL_BACKUP_BLOCK, CTRL_HISTMGR_BACKUP_BLOCK);
+      linkEvents(CSNMGR_CTRL_CHECK_BLOCK, CTRL_BIZMGR_CHECK_BLOCK);
+      linkEvents(CSNMGR_CTRL_CLEAN_BLOCKLIST, CTRL_BLKMGR_CLEAN_BLOCKLIST);
+      linkEvents(CSNMGR_CTRL_BROADCAST, CTRL_SECMGR_SIGN_TO_BROADCAST);
+      linkEvents(NTKMGR_CTRL_SEND_MESSAGE, CTRL_SECMGR_SIGN_TO_SEND_MESSAGE);
+      linkEvents(NTKMGR_CTRL_BROADCAST, CTRL_SECMGR_SIGN_TO_BROADCAST);
+      linkEvents(NTKMGR_CTRL_SHARE_TRX, CTRL_TRXMGR_SHARE);
+      linkEvents(NTKMGR_CTRL_SHARE_BLK, CTRL_BLKMGR_SHARE);
+      linkEvents(TRXMGR_CTRL_BROADCAST, CTRL_SECMGR_SIGN_TO_BROADCAST);
+      linkEvents(TRXMGR_CTRL_SEND_MESSAGE, CTRL_SECMGR_SIGN_TO_SEND_MESSAGE);
+      linkEvents(BLKMGR_CTRL_SEND_MESSAGE, CTRL_SECMGR_SIGN_TO_SEND_MESSAGE);
+      linkEvents(BLKMGR_CTRL_BROADCAST, CTRL_SECMGR_SIGN_TO_BROADCAST);
+      linkEvents(BIZMGR_CTRL_NEW_BIZ, CTRL_TRXMGR_CREATE_TRX);
+      linkEvents(TERMMGR_CTRL_SET_CONF, CTRL_BIZMGR_SET_CONF);
+      linkEvents(TERMMGR_CTRL_CREATE_TRX, CTRL_BIZMGR_CREATE_TRX);
+      linkEvents(TERMMGR_CTRL_START, CTRL_NTKMGR_ASK_REGISTER);
+      linkEvents(TERMMGR_CTRL_START, CTRL_BIZMGR_START);
+      linkEvents(TERMMGR_CTRL_START, CTRL_CSNMGR_START);
+      linkEvents(TERMMGR_CTRL_START, CTRL_BLKMGR_LAUNCH);
 };
 
 // From Message type, launch the right process
@@ -52,22 +45,8 @@ function processMessage(message) {
     }
 }
 
-
-
-
-
-function lamportCheck(message) {
-    //LAMPORT CLOCK
-    logger.log('debug','Local Lamport ' + global.lamport + '   coming Lamport ' + message.lamport);
-    if (global.lamport >= message.lamport)
-        if (message.contentType != MESSAGE_REGISTER_ASK)
-            return false;
-
-    if (message.contentType != MESSAGE_REGISTER_ASK) {
-        global.lamport = message.lamport;
-        logger.log('debug',' Update local Lamport to ' + global.lamport);
-    }
-    return true;
+function linkEvents(source, target) {
+  bus.eventBus.on(source, (data) => bus.eventBus.sendEvent(target, data));
 }
 
 module.exports = Controller;

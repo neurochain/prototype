@@ -57,12 +57,12 @@ function launchRandomBlock() {
     charset: 'alphanumeric'
   });
 
-  logger.log(LOG_BLK, 'GENERATING BLOCK - ' + generationId); // TODO : configure text
+  logger.log(LOG_BLK, 'GENERATING BLOCK - ' + generationId);
 
-  var threshold = 3; //TODO : threshold configurable
+  var threshold = global.cfg.trxPerBlock;
   // A block needs to use X transactions to be submitted
   if (global.transactionsMap.size < threshold) {
-    logger.log(LOG_BLK, 'Not enough available transactions' + global.transactionsMap.size + '/' + threshold + ')'); // TODO : configure text
+    logger.log(LOG_BLK, 'Not enough available transactions' + global.transactionsMap.size + '/' + threshold + ')');
     // Not enough transactions to created a block, restart the generation
     setTimeout(function() {
       launchRandomBlock();
@@ -75,7 +75,7 @@ function launchRandomBlock() {
     while (transactionToBlockMap.size < threshold) {
       var tmpTrx = trxs[Math.floor(Math.random() * trxs.length)];
       transactionToBlockMap.set(tmpTrx.id, tmpTrx);
-      logger.log(LOG_BLK, 'trx selected : ' + tmpTrx.id + '    ' + 'all selected : ' + transactionToBlockMap.size); // TODO : configure text
+      logger.log(LOG_BLK, 'trx selected : ' + tmpTrx.id + '    ' + 'all selected : ' + transactionToBlockMap.size); 
     }
 
     // Create the full block Object

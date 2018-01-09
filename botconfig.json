@@ -11,8 +11,8 @@
   "mailTextSeparator": " ",
   "socket": {
     "ip": "127.0.0.1",
-    "authorized": true,
     "listeningPort": 5000,
     "sendingPort": 12345
-  }
+  },
+  "trxPerBlock" : 5
 }

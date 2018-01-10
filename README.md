@@ -24,16 +24,17 @@ Producer creates fruits and converts it into transactions.
 Transactions are propagated to the other bots.
 
 
-When transactions are enough, bots create blocks.
+When there are enough transactions, bots create blocks.
 
 
 Consensus is established between the 4 bots to decide which one is going to write in the ledger. The block is written.
 
 
-When Production transactions are wrote into the NeuroChain, carrier, then warehouse, then shop can perfom their jobs too. 
+When Production transactions are written into the NeuroChain, the carrier, then the warehouse, then the shop can perfom their jobs too. 
 
 
-Every information is shared and approved and validated by the network. This is the birth of NeuroChain.
+Every information is shared, approved and validated by the network.
+
 
 ## Run this prototype
 Clone this repository then run:

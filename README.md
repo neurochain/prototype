@@ -3,8 +3,12 @@
 ## First public version of our sandbox prototype
 Take a deep look at the project [NeuroChain](https://www.neurochaintech.io/). Future of blockchains coming soon...
 
-This sandbox permits us to test some features of our projects. Mainly about communication and consensus matters.
+
+This sandbox permits us to test some features of our projects. Mainly about communication and consensus matters. We are currently using NodeJS to develop this prototype for quickness reason. Final version of NeuroChain will be mostly developed in C++.
+
+
 Updates are coming every day.
+
 
 **What is doing this program ?**
 

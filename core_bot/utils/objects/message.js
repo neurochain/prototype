@@ -11,7 +11,6 @@ function Message() {
     this.dateReceived = '';
     this.dateSent = '';
     this.latency = '';
-    this.lamport = 0;
     this.content = '';
     this.contentType = '';
 }

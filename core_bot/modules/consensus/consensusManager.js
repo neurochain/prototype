@@ -121,7 +121,7 @@ function processChosenBlock(message) {
   }
   var trxsOK = true;
   // Let's validate once again all transactions contained in the block
-  var trxFromBlock = H.jsonToMap(message.content.block.content);
+  var trxFromBlock = H.arrayToMap(message.content.block.content);
   logger.log(LOG_CSN, 'Block ' + message.content.block.generationID + ' validation'); // TODO : configure text
   trxFromBlock.forEach(function(value, key) {
     if (trxsOK) {

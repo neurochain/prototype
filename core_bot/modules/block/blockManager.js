@@ -40,7 +40,7 @@ function BlockManager() {
       launchRandomBlock();
     }, 25 * 1000);
   });
-};
+}
 
 // LaunchRandomBlock
 // This function is launched when bot starts. It considers every available transactions and composes a new block from these.
@@ -50,7 +50,7 @@ function launchRandomBlock() {
   var delay = randomString.generate({
     length: 1,
     charset: 'numeric'
-  })
+  });
   // Block Id is randomized to avoid duplicates and to track blocks easily
   var generationId = randomString.generate({
     length: 8,
@@ -81,7 +81,7 @@ function launchRandomBlock() {
     // Create the full block Object
     var block = new blockClass();
     block.id = global.lastBlockId;
-    block.content = H.mapToJson(transactionToBlockMap);
+    block.content = Array.from(transactionToBlockMap.values());
     block.creator = global.localBot.botID;
     block.generationID = generationId;
     block.randomValue = Math.random();
@@ -122,7 +122,7 @@ function manageNewBlock(block) {
   }
 
   // is block valid ?
-  var trxFromBlock = H.jsonToMap(block.content);
+  var trxFromBlock = H.arrayToMap(block.content);
   var blockOK = true;
   trxFromBlock.forEach(function(value, key) {
     if (blockOK) {
@@ -158,7 +158,7 @@ function manageNewBlock(block) {
 function cleanTmpBlockList() {
   global.tempBlocksMap.forEach(function(value, key) {
     var trxsOK = true;
-    var trxFromBlock = H.jsonToMap(value.content);
+    var trxFromBlock = H.arrayToMap(value.content);
     // browsing all transactions from the block and check if the are in the available list. If not, block is deleted.
     trxFromBlock.forEach(function(value, key) {
       if (trxsOK) {
@@ -204,7 +204,7 @@ function chooseBlockToAdd() {
     choosenBlock = values[Math.floor(Math.random() * values.length)];
     var trxsOK = true;
     // is block valid ?
-    var trxFromBlock = H.jsonToMap(choosenBlock.content);
+    var trxFromBlock = H.arrayToMap(choosenBlock.content);
     // check transactions contained in the block
     logger.log(LOG_BLK, 'Block selected. Checking transactions');
     trxFromBlock.forEach(function(value, key) {

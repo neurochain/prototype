@@ -260,7 +260,7 @@ function createBusiness() {
 }
 
 function checkBusiness(block) {
-    var trxmap = H.jsonToMap(block.content);
+    var trxmap = H.arrayToMap(block.content);
     logger.log(LOG_BIZ, 'BEFORE');
     logger.log(LOG_BIZ, producedMap.size + ' - ' + carriedMap.size + ' - ' + stockedMap.size + ' - ' + soldMap.size);
     // switch

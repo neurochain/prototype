@@ -8,6 +8,7 @@ function Transaction() {
     this.content = '';
     this.creationDate = '';
     this.techDateStored = '';
+    this.id='';
     this._id = '';
 }
 module.exports = Transaction;

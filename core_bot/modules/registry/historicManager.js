@@ -11,8 +11,8 @@ function HistoricManager() {
      bus.eventBus.on(CTRL_HISTMGR_BACKUP_BLOCK, function (data) { backupBlock(data); });
 }
 
-function backupObject(transaction) {
-    bus.eventBus.sendEvent(HISTMGR_POUCHBASER_BACKUP_OBJ, transaction);
+function backupObject(obj) {
+    bus.eventBus.sendEvent(HISTMGR_POUCHBASER_BACKUP_OBJ, obj);
 }
 
 function backupBlock(block) {

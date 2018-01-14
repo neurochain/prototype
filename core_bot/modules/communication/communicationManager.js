@@ -13,7 +13,10 @@ function CommunicationManager() {
 
     // Internal events subscriptions
      bus.eventBus.on(SECMGR_COMMGR_BROADCAST_MESSAGE, function (message) { broadcastMessage(message);});
-     bus.eventBus.on(SECMGR_COMMGR_SEND_MESSAGE, function (message) { bus.eventBus.sendEvent(COMMGR_SOCKETSENDER_SEND_MESSAGE, message);});
+     bus.eventBus.on(SECMGR_COMMGR_SEND_MESSAGE, function (message) {
+        bus.eventBus.sendEvent(COMMGR_SOCKETSENDER_SEND_MESSAGE, message);
+        bus.eventBus.sendEvent(COMMGR_CTRL_BACKUP_OBJECT, message);
+    });
      bus.eventBus.on(SOCKETLISTENER_COMMGR_NEW_MESSAGE, function (message) { bus.eventBus.sendEvent(COMMGR_SECMGR_VALIDATE_MESSAGE, message); });
 }
 function broadcastMessage(message) {
@@ -36,6 +39,7 @@ function broadcastMessage(message) {
             logger.log(LOG_COM, 'Sending message to :' + JSON.stringify(value));
             message.receiver = value;
             bus.eventBus.sendEvent(COMMGR_SOCKETSENDER_SEND_MESSAGE, message);
+            bus.eventBus.sendEvent(COMMGR_CTRL_BACKUP_OBJECT, message);
         }
     });
 }

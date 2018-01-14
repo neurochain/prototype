@@ -35,14 +35,14 @@ function backupElement(data) {
     var dbToUse;
 
     switch (data.objectType) {
-        case OBJECT_TYPE_TRANSACTION:
+    /*    case OBJECT_TYPE_TRANSACTION:
             dbToUse = objectdb;
             data._id = SHA256(data.dateReceived + '-' + data.dateSent + '-' + data.content).toString();
             break;
         case OBJECT_TYPE_BOT:
             dbToUse = objectdb;
             data._id = SHA256(data.date_creation + '-' + data.botID).toString();
-            break;
+            break;*/
         case OBJECT_TYPE_MESSAGE:
             dbToUse = objectdb;
             data._id = SHA256(data.dateReceived + '-' + data.dateSent + '-' + data.content).toString();

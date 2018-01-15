@@ -11,6 +11,7 @@ LOG_COM = 'LOG_COM';
 LOG_BIZ = 'LOG_BIZ';
 LOG_SEC = 'LOG_SEC';
 LOG_HST = 'LOG_HST';
+LOG_CON = 'LOG_CON';
 
 var oldMessages = [];
 var localSocket = null;

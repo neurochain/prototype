@@ -77,7 +77,11 @@
  HISTMGR_POUCHBASER_BACKUP_BLK = 'HISTMGR_POUCHBASER_BACKUP_BLK';
  HISTMGR_POUCHBASER_BACKUP_OBJ = 'HISTMGR_POUCHBASER_BACKUP_OBJ';
 
- // ERROR EVENT
+// CONNECTOR
+
+
+
+
  function NotificationsTypes() { };
 
  module.exports = NotificationsTypes;

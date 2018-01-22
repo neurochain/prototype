@@ -1,4 +1,5 @@
-﻿var bus = require('../bus/bus.js'),
+
+var bus = require('../bus/bus.js'),
 H = require('../../utils/helper'),
 randomString = require('randomstring'),
 messageClass = require('../../utils/objects/message.js'),
@@ -15,7 +16,7 @@ function TransactionManager() {
      bus.eventBus.on(CTRL_TRXMGR_SHARE, function (bot) { shareTransactions(bot); });
      bus.eventBus.on(CTRL_TRXMGR_UPDATE_TRXS, function (message) { updateTransactions(message); });
      bus.eventBus.on(CTRL_TRXMGR_CREATE_TRX, function (bizObject) { createTransaction(bizObject); });
-};
+}
 
 // CreateTransaction
 // A transaction is created from a business object.

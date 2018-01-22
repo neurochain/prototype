@@ -9,7 +9,7 @@
 ***  |_| \_|\___|\__,_|_|  \___/ \_____|_| |_|\__,_|_|_| |_|  ***
 ***                                                           ***
 *****************************************************************
-*** Demonstrator - V0.8                                       ***
+*** Demonstrator                                              ***
 ***                                        by NeuroChainTech  ***
 *****************************************************************/
 
@@ -33,6 +33,7 @@ var bus = require('./core_bot/modules/bus/bus'),
   BlockManagerModule = require('./core_bot/modules/block/blockManager'),
   NetworkManagerModule = require('./core_bot/modules/network/networkManager'),
   ConsensusManagerModule = require('./core_bot/modules/consensus/consensusManager');
+  ConnectorManagerModule = require('./core_bot/modules/connector/connectorManager');
 
 var BotClass = require('./core_bot/utils/objects/bot'),
   cfg = require('config.json')('./botconfig.json');
@@ -84,14 +85,20 @@ global.localBot = new BotClass();
 global.localBot.IP = argSeedIP; // TODO: set local IP in configuration
 global.localBot.UDPListeningPort = argLocalListeningPort;
 global.localBot.UDPSendingPort = argLocalSendingPort;
+global.localBot.ConnectorUDPPort = parseInt(9876);
 
 // Randomize bot Id depending on environment (NeuroChain || Localchain)
 if (global.mode == 'NeuroChain') {
     global.localBot.botID = randomString.generate({length: 6, charset: 'alphanumeric' });
 }
 else {
-    if (process.argv[3] == null) global.localBot.botID = 'BOT1'; // TODO: BOT configurable
-    else global.localBot.botID = 'BOT'+process.argv[3];
+    if (process.argv[3] == null)
+      global.localBot.botID = 'BOT1'; // TODO: BOT configurable
+    else {
+      global.localBot.botID = 'BOT'+process.argv[3];
+      global.localBot.ConnectorUDPPort = parseInt(9876) + parseInt(process.argv[3]);
+    }
+
 }
 global.localBot.date_creation = Date.now().toString();
 global.localBot.emmitedTransaction = 0; // Count of all transactions submitted to the network, created by the local bot //TODO
@@ -131,6 +138,7 @@ var ntkMgr = new NetworkManagerModule();
 var bizMgr = new BusinessManagerModule();
 var controller = new Controller();
 var csnMgr = new ConsensusManagerModule();
+var cntMgr = new ConnectorManagerModule();
 var terminal = new TerminalManagerModule();
 
 //TODO: propriété du message/transaction

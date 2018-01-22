@@ -34,6 +34,8 @@ function Controller() {
   linkEvents(TERMMGR_CTRL_START, CTRL_BIZMGR_START);
   linkEvents(TERMMGR_CTRL_START, CTRL_CSNMGR_START);
   linkEvents(TERMMGR_CTRL_START, CTRL_BLKMGR_LAUNCH);
+  linkEvents(CNTMGR_CTRL_INPUT, CTRL_TRXMGR_CREATE_TRX);
+
 };
 
 // From Message type, launch the right process

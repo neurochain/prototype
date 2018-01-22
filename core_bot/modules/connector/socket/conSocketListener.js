@@ -4,8 +4,7 @@ dgram = require('dgram'),
 server = dgram.createSocket('udp4');
 
 function ConSocketListener() {
-    //var port = global.localBot.UDPPortConnector;
-    var port = 9876;
+    var port = global.localBot.ConnectorUDPPort;
     var host = global.cfg.socket.ip;
 
     server.on('listening', function () {
@@ -15,7 +14,7 @@ function ConSocketListener() {
 
     server.on('message', function (socketMessage, remote) {
         logger.log(LOG_CON,'Connector - UDP received from port' + remote.port);
-        bus.eventBus.sendEvent(CONSOCKET_CONMGR_INPUT, socketInputToInput(socketInput));
+        bus.eventBus.sendEvent(CNTSOCKET_CONMGR_INPUT, socketInputToInput(socketInput));
     });
     server.bind(port, host);
 }
@@ -28,4 +27,4 @@ function socketInputToInput(socketInput) {
     return mess;
 }
 
-module.exports = SocketListener;
+module.exports = ConSocketListener;

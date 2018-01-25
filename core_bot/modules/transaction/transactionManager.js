@@ -43,44 +43,6 @@ function createTransaction(bizObject) {
     bus.eventBus.sendEvent(TRXMGR_CTRL_BROADCAST, transacMessage);
 }
 
-//LaunchRandomTransaction
-// not use since business manager
-/*
-function launchRandomTransaction() {
-    logger.log(LOG_TRX, 'Launch Random Transaction');
-
-    var delay = randomString.generate({
-        length: 1,
-        charset: 'numeric'
-    });
-
-    var trId = randomString.generate({
-        length: 8,
-        charset: 'alphanumeric'
-    });
-
-    logger.log(LOG_TRX, ' Transaction coming in ' + delay + ' s');
-    setTimeout(function () {
-        var transacMessage = new messageClass();
-        transacMessage.emetter = global.localBot;
-        transacMessage.channel = 'UDP';
-        transacMessage.contentType = MESSAGE_NEW_TRX;
-        var transac = new transactionClass();
-        transac.id = trId;
-        // TRANSACTION BASIC
-        // transac.content = 'Transaction ID : ' + trId + ' from ' + global.localBot.botID;
-        // TRANSACTION ADVANCED : using bot actvitity
-
-        transac.content = 'Transaction ID : ' + trId + ' from ' + global.localBot.botID;
-        logger.log(LOG_TRX, 'Transaction created : ' + transac.content);
-        transacMessage.content = transac;
-        bus.eventBus.sendEvent(TRXMGR_CTRL_BROADCAST, transacMessage);
-
-        launchRandomTransaction();
-    }, delay * 1000)
-}
-*/
-
 // Process Transaction
 // When a message containing a transaction is received, transaction is added to the list of available transactions
 function processTransaction(message) {
@@ -94,6 +56,7 @@ function processTransaction(message) {
         global.transactionsMap.set(message.content.id, message.content);
         logger.log(LOG_TRX, 'Transaction  ' + message.content.id + ' added. Currently ' + global.transactionsMap.size + ' in memory'); // TODO configure text
         bus.eventBus.sendEvent(TRXMGR_CTRL_BROADCAST, message);
+        bus.eventBus.sendEvent(TRXMGR_STATMGR_ADD_TRX);
     }
 }
 

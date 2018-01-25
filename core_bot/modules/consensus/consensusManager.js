@@ -153,7 +153,7 @@ function processChosenBlock(message) {
       value.lastBlockID = global.lastBlockId;
       global.transactionsMap.delete(key);
     });
-    logger.log('info', 'Deleting transactions from pool ( ' + tmpTrxSize + ' -> ' + global.transactionsMap.size + ')'); // TODO : configure text
+    logger.log('info', 'Deleting transactions from pool ( ' + tmpTrxSize + ' -> ' + global.transactionsMap.size + ')');
     // 3. Resetting vote environement
     global.currentVote = new Map();
     global.elected = false;
@@ -172,6 +172,7 @@ function processChosenBlock(message) {
     bus.eventBus.sendEvent(CSNMGR_CTRL_BROADCAST, message);
     bus.eventBus.sendEvent(CSNMGR_CTRL_CLEAN_BLOCKLIST, '');
     bus.eventBus.sendEvent(CSNMGR_CTRL_CHECK_BLOCK, message.content.block);
+    bus.eventBus.sendEvent(CSNMGR_STATMGR_BLOCKCHAIN_INCREMENT);
     // 6. Select a new writer  in X seconds
     setTimeout(function() {
       selectWriter();

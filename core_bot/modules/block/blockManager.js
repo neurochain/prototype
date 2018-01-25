@@ -128,9 +128,9 @@ function manageNewBlock(block) {
     if (blockOK) {
       if (global.transactionsMap.get(key) == null) {
         blockOK = false;
-        logger.log(LOG_BLK, block.generationID + ' is trx ' + key + ' in my list ?  ---> NO'); // TODO : configure text
+        logger.log(LOG_BLK, block.generationID + ' is trx ' + key + ' in my list ?  ---> NO');
       } else {
-        logger.log(LOG_BLK, block.generationID + ' is trx ' + key + ' in my list ?  ---> YES'); // TODO : configure text
+        logger.log(LOG_BLK, block.generationID + ' is trx ' + key + ' in my list ?  ---> YES');
       }
     }
   });
@@ -141,7 +141,7 @@ function manageNewBlock(block) {
 
     // Block is valid: save the block in a temporary list
     global.tempBlocksMap.set(block.generationID, block);
-    logger.log(LOG_BLK, 'Block is valid, backup it in temp list (' + global.tempBlocksMap.size + ')'); // TODO : configure text
+    logger.log(LOG_BLK, 'Block is valid, backup it in temp list (' + global.tempBlocksMap.size + ')');
     // diffuse validated block
     var blockMessage = new messageClass();
     blockMessage.emetter = global.localBot;
@@ -149,6 +149,8 @@ function manageNewBlock(block) {
     blockMessage.content = block;
     blockMessage.contentType = MESSAGE_NEW_BLOCK;
     bus.eventBus.sendEvent(BLKMGR_CTRL_BROADCAST, blockMessage);
+    bus.eventBus.sendEvent(BLKMGR_STATMGR_ADD_BLOCK);
+
   }
 }
 
@@ -184,7 +186,7 @@ function shareBlocks(bot) {
   blockMessage.channel = 'UDP';
   blockMessage.content = H.mapToJson(global.blocksMap);
   blockMessage.contentType = MESSAGE_UDPATE_BLK;
-  logger.log(LOG_BLK, 'Sharing ' + global.blocksMap.size + ' blocks with bot' + bot.botID); // TODO : configure text
+  logger.log(LOG_BLK, 'Sharing ' + global.blocksMap.size + ' blocks with bot' + bot.botID);
   blockMessage.receiver = bot;
   bus.eventBus.sendEvent(BLKMGR_CTRL_SEND_MESSAGE, blockMessage);
 }

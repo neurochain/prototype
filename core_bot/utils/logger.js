@@ -36,15 +36,6 @@ io.sockets.on('connection', function (socket) {
 
 var logger = exports;
 
-LOG_CSN = 'LOG_CSN';
-LOG_TRX = 'LOG_TRX';
-LOG_BLK = 'LOG_BLK';
-LOG_REG = 'LOG_REG';
-LOG_COM = 'LOG_COM';
-LOG_BIZ = 'LOG_BIZ';
-LOG_SEC = 'LOG_SEC';
-LOG_HST = 'LOG_HST';
-
 logger.log = function (level, message) {
     if (level == 'info' || level == LOG_TRX || level == LOG_CSN || level == LOG_BLK ){
         if (typeof message !== 'string') {

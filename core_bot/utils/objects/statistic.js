@@ -17,4 +17,4 @@ function Statistic() {
 }
 
 
-module.exports = Block;
+module.exports = Statistic;

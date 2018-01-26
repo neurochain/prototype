@@ -37,11 +37,10 @@ io.sockets.on('connection', function (socket) {
 var logger = exports;
 
 logger.log = function (level, message) {
-    if (level == 'info' || level == LOG_TRX || level == LOG_CSN || level == LOG_BLK ){
+    if (level == 'info' ){
         if (typeof message !== 'string') {
             message = JSON.stringify(message);
         }
-       // console.log(level + '-' + global.localBot.botID + '-' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '.' + new Date().getMilliseconds()+ ': ' + message);
         log(level + '-' + global.localBot.botID + '-' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '.' + new Date().getMilliseconds() + ': ' + message);
     }
 };
@@ -51,7 +50,7 @@ function log(message) {
         localSocket.emit('message', message);
     else
         oldMessages.push(message);
-console.log(message);
+//console.log(message);
 }
 
 console.log('See logs at http://localhost:' + global.httpPort);

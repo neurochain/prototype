@@ -13,8 +13,7 @@ arrayToMap: function(array){
 var map = new Map();
   array.forEach(function(element) {
   map.set(element.id, element);
-  console.log(element.id);
-});
+  });
   return map;
   }
 };

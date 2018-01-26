@@ -64,6 +64,7 @@ function manageNewRegistrationOK(message) {
         if (global.botsMap.get(key) == null) {
             global.botsMap.set(key, value);
             logger.log(LOG_REG, 'New Bot in my list ' + key);
+            bus.eventBus.sendEvent(NTKMGR_STATMGR_ADD_BOT);
             atLeastOneNew = true;
         }
     });

@@ -34,6 +34,7 @@ var bus = require('./core_bot/modules/bus/bus'),
   NetworkManagerModule = require('./core_bot/modules/network/networkManager'),
   ConsensusManagerModule = require('./core_bot/modules/consensus/consensusManager');
   ConnectorManagerModule = require('./core_bot/modules/connector/connectorManager');
+  StatisticsManagerModule = require('./core_bot/modules/statistic/statisticsManager');
 
 var BotClass = require('./core_bot/utils/objects/bot'),
   cfg = require('config.json')('./botconfig.json');
@@ -140,5 +141,6 @@ var controller = new Controller();
 var csnMgr = new ConsensusManagerModule();
 var cntMgr = new ConnectorManagerModule();
 var terminal = new TerminalManagerModule();
+var statMgr = new StatisticsManagerModule();
 
 //TODO: propriété du message/transaction

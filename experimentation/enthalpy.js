@@ -4,7 +4,6 @@ var paramTrxPerBlock = 10000;
 var paramTop =3;
 
 var arr = [];
-var daub = 0;
 function set() {
   var bots = [];
   for(var botsCount = 1; botsCount <paramBots; botsCount++){
@@ -16,7 +15,6 @@ function set() {
       block.blockId = i;
       block.content =[];
       for(var trxCount=0; trxCount <paramTrxPerBlock; trxCount++) {
-          daub ++;
         var trx = {};
         trx.trxId = trxCount * i;
         trx.emitterId = bots[Math.floor(Math.random() * bots.length)];
@@ -53,7 +51,7 @@ var stopSort =Date.now();
 
 
 
-console.log("Total Transactions : "+ daub);
+console.log("Total Transactions : " + paramBlocks*paramTrxPerBlock);
 console.log('enthalpy process time (ms) ' + parseInt(stop-start));
 console.log('sort process time (ms) ' + parseInt(stopSort-startSort));
 console.log('Top ' + paramTop);

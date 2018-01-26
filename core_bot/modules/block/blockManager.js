@@ -223,7 +223,6 @@ function chooseBlockToAdd() {
       logger.log(LOG_BLK, ' Choosen temp block ' + choosenBlock.generationID + ' is unvalid. Pick another one');
       global.tempBlocksMap.delete(choosenBlock.generationID);
     } else {
-      console.log("Fin inspection block ok");
       // All transactions are ok, block is valid
       logger.log(LOG_BLK, 'Choosen temp block ' + choosenBlock.generationID + ' is valid');
       blockOK = true;

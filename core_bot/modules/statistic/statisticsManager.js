@@ -35,7 +35,8 @@ function sendStatistic() {
   statistic.blkPerSecond = statistic.totalTrxEver/(statistic.timeAlive/1000);// new submitted block per second
   statistic.chainSize= global.blocksMap.size;// current blockchain size
   this.netSize = global.botsMap.size; // number of bots
-  
+  logger.logStat(statistic);
+
   setTimeout(function () {
      sendStatistic(); }, 10 * 1000);
 }

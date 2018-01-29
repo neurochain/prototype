@@ -1,4 +1,3 @@
-
 var bus = require('../modules/bus/bus.js'),
 logClass = require('./objects/log.js'),
 fs = require('fs'),
@@ -23,29 +22,34 @@ var server = http.createServer(function (req, res) {
     });
 });
 
+server.listen(global.httpPort);
+
+var logger = exports;
 
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
     localSocket = socket;
     oldMessages.forEach(function (value) {
-       log(value);
+       emitlog(value);
     });
   });
 
-var logger = exports;
-
 logger.log = function (level, message) {
-    if (level == 'info' ){
+    if (level == 'info' || level == LOG_TRX){
         if (typeof message !== 'string') {
             message = JSON.stringify(message);
         }
        var lo = new logClass();
        lo.botId = global.localBot.botID;
-       lo.timestamp=Date.now().toString();
+       lo.timestamp=Date.now();
        lo.message=message;
 
         emitlog(JSON.stringify(lo));
     }
+};
+
+logger.logStat = function (statistic) {
+        emitlog(JSON.stringify(statistic));
 };
 
 function emitlog(message) {

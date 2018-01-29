@@ -1,5 +1,6 @@
 
 var bus = require('../modules/bus/bus.js'),
+logClass = require('./objects/log.js'),
 fs = require('fs'),
 http = require('http');
 
@@ -22,11 +23,8 @@ var server = http.createServer(function (req, res) {
     });
 });
 
-server.listen(global.httpPort);
 
-log('Preparing log materials');
 var io = require('socket.io').listen(server);
-log('Server opening socket. Waiting for client to connect...');
 io.sockets.on('connection', function (socket) {
     localSocket = socket;
     oldMessages.forEach(function (value) {
@@ -41,19 +39,22 @@ logger.log = function (level, message) {
         if (typeof message !== 'string') {
             message = JSON.stringify(message);
         }
-        log(level + '-' + global.localBot.botID + '-' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '.' + new Date().getMilliseconds() + ': ' + message);
+       var lo = new logClass();
+       lo.botId = global.localBot.botID;
+       lo.timestamp=Date.now().toString();
+       lo.message=message;
+
+        emitlog(JSON.stringify(lo));
     }
 };
 
-function log(message) {
+function emitlog(message) {
     if (localSocket != null)
         localSocket.emit('message', message);
     else
         oldMessages.push(message);
-//console.log(message);
 }
 
-console.log('See logs at http://localhost:' + global.httpPort);
 setTimeout(function () { globalLogs(); }, 15000);
 function globalLogs() {
     try {

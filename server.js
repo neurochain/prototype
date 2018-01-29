@@ -42,9 +42,6 @@ var BotClass = require('./core_bot/utils/objects/bot'),
 //  Business implementation
 var BusinessManagerModule = require('./business_impl/businessManager');
 
-// Tools for Business
-var TerminalManagerModule = require('./business_impl/tools/terminalManager');
-
 ////////////////////////////////////////////////
 //////////////// GET LAUNCHER PARAMETERS
 var argLocalListeningPort = process.argv[4];
@@ -140,7 +137,8 @@ var bizMgr = new BusinessManagerModule();
 var controller = new Controller();
 var csnMgr = new ConsensusManagerModule();
 var cntMgr = new ConnectorManagerModule();
-var terminal = new TerminalManagerModule();
 var statMgr = new StatisticsManagerModule();
 
-//TODO: propriété du message/transaction
+// START BOT
+bus.eventBus.sendEvent(SRV_CTRL_SET_CONF,null);
+bus.eventBus.sendEvent(SRV_CTRL_START, null);

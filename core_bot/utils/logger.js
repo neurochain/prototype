@@ -35,7 +35,7 @@ io.sockets.on('connection', function (socket) {
   });
 
 logger.log = function (level, message) {
-    if (level == 'info' || level == LOG_TRX){
+    if (level == 'info' || level == LOG_TRX  || level == LOG_REG ||  level == LOG_CSN){
         if (typeof message !== 'string') {
             message = JSON.stringify(message);
         }

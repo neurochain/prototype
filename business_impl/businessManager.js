@@ -51,34 +51,7 @@ function setBusinessConf(conf) {
     }
     logger.log('info', 'Business configuration done! Bot is ' + global.localBot.activity + ' ' + global.localBot.variety);
 }
-/*
-function setDefaultChainScenario() {
-    switch (global.localBot.botID) {
-        case 'BOT1':
-            setBusinessConf({ activity: 'producer', variety: 'apples' });
-            break;
-        case 'BOT2':
-            setBusinessConf({ activity: 'producer', variety: 'grapes' });
-            break;
-        case 'BOT3':
-            setBusinessConf({ activity: 'producer', variety: 'pears' });
-            break;
-        case 'BOT4':
-        case 'BOT5':
-            setBusinessConf({ activity: 'carrier', variety: '' });
-            break;
-        case 'BOT6':
-        case 'BOT7':
-            setBusinessConf({ activity: 'warehouse', variety: '' });
-            break;
-        case 'BOT8':
-        case 'BOT9':
-        case 'BOT10':
-            setBusinessConf({ activity: 'shop', variety: '' });
-            break;
-    }
-}
-*/
+
 function setDefaultChainScenario() {
     switch (global.localBot.botID) {
         case 'BOT1':

@@ -34,18 +34,16 @@ io.sockets.on('connection', function (socket) {
     });
   });
 
-logger.log = function (level, message) {
-    if (level == 'info' || level == LOG_TRX  || level == LOG_REG ||  level == LOG_CSN){
-        if (typeof message !== 'string') {
-            message = JSON.stringify(message);
-        }
-       var lo = new logClass();
-       lo.botId = global.localBot.botID;
-       lo.timestamp=Date.now();
-       lo.message=message;
-
-        emitlog(JSON.stringify(lo));
+logger.log = function (domain, message) {
+    if (typeof message !== 'string') {
+      message = JSON.stringify(message);
     }
+    var lo = new logClass();
+    lo.botId = global.localBot.botID;
+    lo.timestamp=Date.now();
+    lo.message=message;
+    lo.domain=domain;
+    emitlog(JSON.stringify(lo));
 };
 
 logger.logStat = function (statistic) {
@@ -57,12 +55,14 @@ function emitlog(message) {
         localSocket.emit('message', message);
     else
         oldMessages.push(message);
+
+       console.log(message);
 }
 
 setTimeout(function () { globalLogs(); }, 15000);
 function globalLogs() {
     try {
-        logger.log(LOG_BIZ, '---------------------------- \n| tmpblocks ' + global.tempBlocksMap.size + '\n| trx ' + global.transactionsMap.size + '\n| LastBlockId ' + global.lastBlockId + '\n| Blocks ' + global.blocksMap.size + '\n| Bots ' + global.botsMap.size + '\n----------------------------');
+        logger.log('info', '---------------------------- \n| tmpblocks ' + global.tempBlocksMap.size + '\n| trx ' + global.transactionsMap.size + '\n| LastBlockId ' + global.lastBlockId + '\n| Blocks ' + global.blocksMap.size + '\n| Bots ' + global.botsMap.size + '\n----------------------------');
     }
     catch (e) { }
     setTimeout(function () { globalLogs(); }, 15000);

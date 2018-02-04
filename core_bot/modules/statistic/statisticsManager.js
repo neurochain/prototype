@@ -35,6 +35,14 @@ function sendStatistic() {
   statistic.blkPerSecond = statistic.totalTrxEver/(statistic.timeAlive/1000);// new submitted block per second
   statistic.chainSize= global.blocksMap.size;// current blockchain size
   this.netSize = global.botsMap.size; // number of bots
+
+  var startUsage = process.cpuUsage();
+  var now = Date.now();
+  while (Date.now() - now < 1000);
+  var cpuSysUser = process.cpuUsage(startUsage);
+  statistic.cpuUsage = cpuSysUser.system/cpuSysUser.user;
+  statistic.memoryUsage = process.memoryUsage().heapUsed;
+
   logger.logStat(statistic);
 
   setTimeout(function () {

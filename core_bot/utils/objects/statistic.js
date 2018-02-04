@@ -13,6 +13,8 @@ function Statistic() {
     this.blkPerSecond = 0;// new submitted block per second
     this.chainSize=0;// current blockchain size
     this.netSize = 0; // number of bots
+    this.cpuUsage = 0;
+    this.ramUsage = 0;
 
 }
 

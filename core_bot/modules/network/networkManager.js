@@ -5,7 +5,7 @@ messageClass = require('../../utils/objects/message.js'),
 botClass = require('../../utils/objects/bot.js');
 
 function NetworkManager() {
-    logger.log('info', 'Network Manager subscribing events');
+    logger.log(LOG_INF, 'Network Manager subscribing events');
      bus.eventBus.on(CTRL_NTKMGR_ASK_REGISTER, function () { askRegister(); });
      bus.eventBus.on(CTRL_NTKMGR_NEW_REGISTRATION_ASK, function (message) { manageNewRegistrationAsk(message); });
      bus.eventBus.on(CTRL_NTKMGR_NEW_REGISTRATION_OK, function (message) { manageNewRegistrationOK(message); });

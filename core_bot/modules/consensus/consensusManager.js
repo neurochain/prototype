@@ -153,7 +153,7 @@ function processChosenBlock(message) {
       value.lastBlockID = global.lastBlockId;
       global.transactionsMap.delete(key);
     });
-    logger.log('info', 'Deleting transactions from pool ( ' + tmpTrxSize + ' -> ' + global.transactionsMap.size + ')');
+    logger.log(LOG_INF, 'Deleting transactions from pool ( ' + tmpTrxSize + ' -> ' + global.transactionsMap.size + ')');
     // 3. Resetting vote environement
     global.currentVote = new Map();
     global.elected = false;

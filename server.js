@@ -119,10 +119,10 @@ logger = require('./core_bot/utils/logger');
 if (!argSeedIP) { argSeedIP = global.cfg.socket.ip; global.localBot.IP = global.cfg.socket.ip; }
 if (!argSeedListeningPort) { argSeedListeningPort = 5000 }
 
-logger.log('info', '- Local Listening Port : ' + argLocalListeningPort);
-logger.log('info', '- Local Sending Port : ' + argLocalSendingPort);
-logger.log('info', '- Seed IP : ' + argSeedIP);
-logger.log('info', '- Seed Listening Port : ' + argSeedListeningPort);
+logger.log(LOG_INF, '- Local Listening Port : ' + argLocalListeningPort);
+logger.log(LOG_INF, '- Local Sending Port : ' + argLocalSendingPort);
+logger.log(LOG_INF, '- Seed IP : ' + argSeedIP);
+logger.log(LOG_INF, '- Seed Listening Port : ' + argSeedListeningPort);
 
 ////////////////////////////////////////////////
 //////////////// LAUNCHING INTERNAL MODULES

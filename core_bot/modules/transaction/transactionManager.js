@@ -11,7 +11,7 @@ transactionClass = require('../../utils/objects/transaction.js');
 // Transaction is send to the network. Each bot validates received transactions then propagates transactions to the network.
 
 function TransactionManager() {
-    logger.log('info', 'Transaction Manager subscribing events');
+    logger.log(LOG_INF, 'Transaction Manager subscribing events');
      bus.eventBus.on(CTRL_TRXMGR_PROCESS, function (message) { processTransaction(message); });
      bus.eventBus.on(CTRL_TRXMGR_SHARE, function (bot) { shareTransactions(bot); });
      bus.eventBus.on(CTRL_TRXMGR_UPDATE_TRXS, function (message) { updateTransactions(message); });
@@ -95,7 +95,7 @@ function updateTransactions(message) {
             logger.log(LOG_TRX, 'Transaction ' + key + ' added. Currently ' + global.transactionsMap.size + ' in memory');// TODO configure text
         }
     });
-    logger.log('info', 'Transactions Updated'); // TODO configure text
+    logger.log(LOG_INF, 'Transactions Updated'); // TODO configure text
 }
 
 module.exports = TransactionManager;

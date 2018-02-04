@@ -12,6 +12,7 @@ LOG_BIZ = 'LOG_BIZ';
 LOG_SEC = 'LOG_SEC';
 LOG_HST = 'LOG_HST';
 LOG_CON = 'LOG_CON';
+LOG_INF = 'LOG_INF';
 
 var oldMessages = [];
 var localSocket = null;
@@ -56,13 +57,13 @@ function emitlog(message) {
     else
         oldMessages.push(message);
 
-       console.log(message);
+      // console.log(message);
 }
 
 setTimeout(function () { globalLogs(); }, 15000);
 function globalLogs() {
     try {
-        logger.log('info', '---------------------------- \n| tmpblocks ' + global.tempBlocksMap.size + '\n| trx ' + global.transactionsMap.size + '\n| LastBlockId ' + global.lastBlockId + '\n| Blocks ' + global.blocksMap.size + '\n| Bots ' + global.botsMap.size + '\n----------------------------');
+        logger.log(LOG_INF, '---------------------------- \n| tmpblocks ' + global.tempBlocksMap.size + '\n| trx ' + global.transactionsMap.size + '\n| LastBlockId ' + global.lastBlockId + '\n| Blocks ' + global.blocksMap.size + '\n| Bots ' + global.botsMap.size + '\n----------------------------');
     }
     catch (e) { }
     setTimeout(function () { globalLogs(); }, 15000);

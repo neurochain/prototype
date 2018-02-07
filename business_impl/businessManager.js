@@ -16,7 +16,7 @@ proposedSold = new Map();
 var i = 0;
 
 function BusinessManager() {
-    logger.log('info', 'Business Manager subscribing events');
+    logger.log(LOG_INF, 'Business Manager subscribing events');
      bus.eventBus.on(CTRL_BIZMGR_CHECK_BLOCK, function (block) { checkBusiness(block); });
      bus.eventBus.on(CTRL_BIZMGR_START, function () { setTimeout(function () { createBusiness(); }, 5 * 1000);});
      bus.eventBus.on(CTRL_BIZMGR_CREATE_TRX, function (seedBiz) {
@@ -37,7 +37,7 @@ function BusinessManager() {
     });
    //if (global.localBot.activity == 'shop') { setTimeout(function () { createSellingBusiness(); }, 150 * 1000); }
      bus.eventBus.on(CTRL_BIZMGR_SET_CONF, function (conf) { setBusinessConf(conf); });
-};
+}
 
 var shopVolume = new Map();
 
@@ -49,7 +49,7 @@ function setBusinessConf(conf) {
         global.localBot.activity = conf.activity;
         global.localBot.variety = conf.variety;
     }
-    logger.log('info', 'Business configuration done! Bot is ' + global.localBot.activity + ' ' + global.localBot.variety);
+    logger.log(LOG_INF, 'Business configuration done! Bot is ' + global.localBot.activity + ' ' + global.localBot.variety);
 }
 
 function setDefaultChainScenario() {
@@ -76,7 +76,7 @@ proposedStock = new Map();
 proposedSold = new Map();
 
 function createProducingBusiness(seedTrx) {
-    if (i > global.cfg.businessTotalTrx ) {
+    if (i > global.cfg.businessTotalTrx && global.cfg.businessTotalTrx != -1) {
         return;
     }
     i += 1;
@@ -101,7 +101,7 @@ function createProducingBusiness(seedTrx) {
 
          // do not stop the automatic generation
          var delay = randomString.generate({ length: 2, charset: 'numeric' });
-         setTimeout(function () { createProducingBusiness(); }, delay * 1000);
+         setTimeout(function () { createProducingBusiness(); }, 10);
      }
      else {
          bo.quantity = seedTrx.quantity;

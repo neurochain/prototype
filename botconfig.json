@@ -16,6 +16,6 @@
   },
   "trxPerBlock" : 5,
   "percentBroadcast" : 100,
-  "businessTotalTrx" : 15
+  "businessTotalTrx" : -1
 
 }

@@ -44,10 +44,11 @@ var BusinessManagerModule = require('./business_impl/businessManager');
 
 ////////////////////////////////////////////////
 //////////////// GET LAUNCHER PARAMETERS
-var argLocalListeningPort = process.argv[4];
-var argLocalSendingPort = process.argv[5];
-argSeedIP = process.argv[6];
-argSeedListeningPort = process.argv[7];
+var argLocalListeningPort = process.argv[3];
+var argLocalSendingPort = process.argv[4];
+argSeedIP = process.argv[5];
+argSeedListeningPort = process.argv[6];
+
 
 ////////////////////////////////////////////////
 //////////////// GLOBAL VARIABLES
@@ -64,17 +65,12 @@ global.electedBot = null; // i am sorting ballot, there is a winner, i store it
 global.validateElectionMap = new Map(); // i am elected, i store all relative counters here
 global.elected = false; // am i the elected one ?
 global.httpPort = parseInt(8080); // if mono bot, use 8080. If simulation NeuroChain, increment httpPort on bot id. // TODO: set port configurable
-if ( parseInt(process.argv[3]) >0) {
-    global.httpPort = parseInt(parseInt(8080) + parseInt(process.argv[3]));
-}
+
+global.httpPort = parseInt(process.argv[7]);
 
 //Generate bot private key (obviously, it will be external in production release)
 var nodeRSA = new nodeRSAModule({ b: 512 });
 global.PrivateKey = nodeRSA.exportKey('pkcs1-der'); //TODO pkcs1-der configurable
-
-
-global.mode = process.argv[2];
-if (process.argv[2] == null) { global.mode = 'debug';}
 
 ////////////////////////////////////////////////
 //////////////// GLOBAL LOCAL BOT
@@ -83,21 +79,10 @@ global.localBot = new BotClass();
 global.localBot.IP = argSeedIP; // TODO: set local IP in configuration
 global.localBot.UDPListeningPort = argLocalListeningPort;
 global.localBot.UDPSendingPort = argLocalSendingPort;
-global.localBot.ConnectorUDPPort = parseInt(9876);
 
-// Randomize bot Id depending on environment (NeuroChain || Localchain)
-if (global.mode == 'NeuroChain') {
-    global.localBot.botID = randomString.generate({length: 6, charset: 'alphanumeric' });
-}
-else {
-    if (process.argv[3] == null)
-      global.localBot.botID = 'BOT1'; // TODO: BOT configurable
-    else {
-      global.localBot.botID = 'BOT'+process.argv[3];
-      global.localBot.ConnectorUDPPort = parseInt(9876) + parseInt(process.argv[3]);
-    }
+global.localBot.botID = 'BOT'+process.argv[3];
+global.localBot.ConnectorUDPPort = parseInt(process.argv[8]);
 
-}
 global.localBot.date_creation = Date.now().toString();
 global.localBot.emmitedTransaction = 0; // Count of all transactions submitted to the network, created by the local bot //TODO
 global.localBot.validatedTransaction = 0;  // Count of all transactions validated by the network, created by the local bot //TODO

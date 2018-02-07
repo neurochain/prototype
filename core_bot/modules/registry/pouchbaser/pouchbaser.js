@@ -93,7 +93,7 @@ function getAll(objectType) {
             break;
     }
 
-    dbToUse.allDocs({ include_docs: true, attachments: true,  }).then(
+    dbToUse.allDocs({ include_docs: true, attachments: true  }).then(
        function (result) {
            logger.log('debug',result);
     }).catch(function (err) {

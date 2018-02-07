@@ -101,7 +101,7 @@ function createProducingBusiness(seedTrx) {
 
          // do not stop the automatic generation
          var delay = randomString.generate({ length: 2, charset: 'numeric' });
-         setTimeout(function () { createProducingBusiness(); }, 10);
+         setTimeout(function () { createProducingBusiness(); }, delay * 10);
      }
      else {
          bo.quantity = seedTrx.quantity;

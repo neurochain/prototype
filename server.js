@@ -80,7 +80,7 @@ global.localBot.IP = argSeedIP; // TODO: set local IP in configuration
 global.localBot.UDPListeningPort = argLocalListeningPort;
 global.localBot.UDPSendingPort = argLocalSendingPort;
 
-global.localBot.botID = 'BOT'+process.argv[3];
+global.localBot.botID = 'BOT'+process.argv[2];
 global.localBot.ConnectorUDPPort = parseInt(process.argv[8]);
 
 global.localBot.date_creation = Date.now().toString();

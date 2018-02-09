@@ -42,7 +42,7 @@ function BusinessManager() {
 var shopVolume = new Map();
 
 function setBusinessConf(conf) {
-    if (conf == null) {
+  if (conf == null) {
         setDefaultChainScenario();
     }
     else {
@@ -76,7 +76,7 @@ proposedStock = new Map();
 proposedSold = new Map();
 
 function createProducingBusiness(seedTrx) {
-    if (i > global.cfg.businessTotalTrx && global.cfg.businessTotalTrx != -1) {
+    if (global.cfg.businessTotalTrx != -1 && i > global.cfg.businessTotalTrx ) {
         return;
     }
     i += 1;
@@ -101,7 +101,7 @@ function createProducingBusiness(seedTrx) {
 
          // do not stop the automatic generation
          var delay = randomString.generate({ length: 2, charset: 'numeric' });
-         setTimeout(function () { createProducingBusiness(); }, delay * 10);
+         setTimeout(function () { createProducingBusiness(); }, delay * 1000);
      }
      else {
          bo.quantity = seedTrx.quantity;
@@ -180,7 +180,7 @@ function createShoppingBusiness(lot) {
 }
 function createSellingBusiness() {
     logger.log(LOG_BIZ, 'createSellingBusiness');
-    let keys = shopVolume.keys();
+    var keys = shopVolume.keys();
     var elementToSell = keys[Math.floor(Math.random() * keys.length)];
     var biz = shopVolume.get(elementToSell);
     var bo = {
@@ -215,15 +215,15 @@ function createBusiness() {
                 break;
             case 'warehouse':
                 if (carriedMap.size > 0) {
-                    let keysC = Array.from(carriedMap.keys());
-                    let elementC = keysC[Math.floor(Math.random() * keysC.length)];
+                    var keysC = Array.from(carriedMap.keys());
+                    var elementC = keysC[Math.floor(Math.random() * keysC.length)];
                     createWarehousingBusiness(carriedMap.get(elementC));
                 }
                 break;
             case 'shop':
                 if (stockedMap.size > 0) {
-                    let keysS = Array.from(stockedMap.keys());
-                    let elementS = keysS[Math.floor(Math.random() * keysS.length)];
+                    var keysS = Array.from(stockedMap.keys());
+                    var elementS = keysS[Math.floor(Math.random() * keysS.length)];
                     createShoppingBusiness(stockedMap.get(elementS));
                 }
                 break;

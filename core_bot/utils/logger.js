@@ -36,6 +36,7 @@ io.sockets.on('connection', function (socket) {
   });
 
 logger.log = function (domain, message) {
+
     if (typeof message !== 'string') {
       message = JSON.stringify(message);
     }
@@ -45,6 +46,7 @@ logger.log = function (domain, message) {
     lo.message=message;
     lo.domain=domain;
     emitlog(JSON.stringify(lo));
+  
 };
 
 logger.logStat = function (statistic) {
@@ -57,14 +59,5 @@ function emitlog(message) {
     else
         oldMessages.push(message);
 
-      // console.log(message);
-}
-
-setTimeout(function () { globalLogs(); }, 15000);
-function globalLogs() {
-    try {
-        logger.log(LOG_INF, '---------------------------- \n| tmpblocks ' + global.tempBlocksMap.size + '\n| trx ' + global.transactionsMap.size + '\n| LastBlockId ' + global.lastBlockId + '\n| Blocks ' + global.blocksMap.size + '\n| Bots ' + global.botsMap.size + '\n----------------------------');
-    }
-    catch (e) { }
-    setTimeout(function () { globalLogs(); }, 15000);
+       console.log(message);
 }

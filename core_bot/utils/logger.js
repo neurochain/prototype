@@ -46,7 +46,7 @@ logger.log = function (domain, message) {
     lo.message=message;
     lo.domain=domain;
     emitlog(JSON.stringify(lo));
-  
+
 };
 
 logger.logStat = function (statistic) {
@@ -59,5 +59,5 @@ function emitlog(message) {
     else
         oldMessages.push(message);
 
-       console.log(message);
+       //console.log(message);
 }

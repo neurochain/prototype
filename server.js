@@ -66,7 +66,7 @@ global.validateElectionMap = new Map(); // i am elected, i store all relative co
 global.elected = false; // am i the elected one ?
 global.httpPort = parseInt(8080); // if mono bot, use 8080. If simulation NeuroChain, increment httpPort on bot id. // TODO: set port configurable
 
-global.httpPort = parseInt(process.argv[7]);
+global.httpPort = parseInt(process.argv[8]);
 
 //Generate bot private key (obviously, it will be external in production release)
 var nodeRSA = new nodeRSAModule({ b: 512 });
@@ -81,7 +81,7 @@ global.localBot.UDPListeningPort = argLocalListeningPort;
 global.localBot.UDPSendingPort = argLocalSendingPort;
 
 global.localBot.botID = 'BOT'+process.argv[2];
-global.localBot.ConnectorUDPPort = parseInt(process.argv[8]);
+global.localBot.ConnectorUDPPort = parseInt(process.argv[7]);
 
 global.localBot.date_creation = Date.now().toString();
 global.localBot.emmitedTransaction = 0; // Count of all transactions submitted to the network, created by the local bot //TODO

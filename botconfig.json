@@ -1,7 +1,6 @@
 {
   "botID": "fromconfig",
-  "debugMode":  false,
-  "database": {
+    "database": {
     "objects": "objectsdb",
     "blockchain": "blockchaindb",
     "remoteObjectDB": "remoteobjectdb",

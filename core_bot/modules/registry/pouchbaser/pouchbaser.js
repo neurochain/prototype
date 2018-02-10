@@ -55,21 +55,21 @@ function backupElement(data) {
 
     dbToUse.put((data), function callback(err, result) {
         if (!err) {
-            logger.log('debug','Data saved in the db! ' + data.objectType);
+            logger.log('LOG_HST','Data saved in the db! ' + data.objectType);
         }
     });
 
     var result;
     dbToUse.get(data._id, function (err, doc) {
         if (err) {
-            return logger.log('debug',err);
+            return logger.log('LOG_HST',err);
         } else {
             result = doc;
-            logger.log('debug',doc);
+            logger.log('LOG_HST',doc);
         }
     });
-    logger.log('debug',result);
-};
+    logger.log('LOG_HST',result);
+}
 
 function getAll(objectType) {
     var dbToUse;
@@ -95,9 +95,9 @@ function getAll(objectType) {
 
     dbToUse.allDocs({ include_docs: true, attachments: true  }).then(
        function (result) {
-           logger.log('debug',result);
+           logger.log('LOG_HST',result);
     }).catch(function (err) {
-        logger.log('debug',err);
+        logger.log('LOG_HST',err);
     });
 }
 

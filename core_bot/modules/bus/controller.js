@@ -9,7 +9,6 @@ H = require('../../utils/helper');
 
 function Controller() {
   bus.eventBus.on(SECMGR_CTRL_VALIDATED_MESSAGE, function (message) {
-    logger.log('debug', 'message validated - worker');
     processMessage(message);
   });
   linkEvents(MINER_CTRL_TRANSACTION_OK, CTRL_TRXMGR_PROCESS);

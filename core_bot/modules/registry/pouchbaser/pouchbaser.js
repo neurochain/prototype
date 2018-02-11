@@ -18,8 +18,8 @@ function Pouchbaser(objectdbName, blockchaindbName) {
     var remoteObjectDB = new PouchDB(global.cfg.database.remoteServerURL + global.cfg.database.remoteObjectDB);
     var remoteBlockDB = new PouchDB(global.cfg.database.remoteServerURL + global.cfg.database.remoteBlockchainDB);
 
-    objectdb.sync(remoteObjectDB, { live: true });
-    blockdb.sync(remoteBlockDB, { live: true });
+  //  objectdb.sync(remoteObjectDB, { live: true });
+  //  blockdb.sync(remoteBlockDB, { live: true });
 
     bus.eventBus.on(HISTMGR_POUCHBASER_BACKUP_OBJ, function (data) { backupElement(data); });
     bus.eventBus.on(HISTMGR_POUCHBASER_BACKUP_BLK, function (data) { backupElement(data); });

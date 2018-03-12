@@ -64,9 +64,11 @@ global.assembly = new Map(); // i build a map of bots filtered on entropy
 global.electedBot = null; // i am sorting ballot, there is a winner, i store it
 global.validateElectionMap = new Map(); // i am elected, i store all relative counters here
 global.elected = false; // am i the elected one ?
-global.httpPort = parseInt(8080); // if mono bot, use 8080. If simulation NeuroChain, increment httpPort on bot id. // TODO: set port configurable
 
+global.httpPort = parseInt(8080); // if mono bot, use 8080. If simulation NeuroChain, increment httpPort on bot id. // TODO: set port configurable
 global.httpPort = parseInt(process.argv[8]);
+
+global.dbSync = process.argv[9] == 'true'; // Replicate ledger in CouchDB
 
 //Generate bot private key (obviously, it will be external in production release)
 var nodeRSA = new nodeRSAModule({ b: 512 });

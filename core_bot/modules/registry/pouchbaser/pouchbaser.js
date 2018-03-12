@@ -12,14 +12,16 @@ var blockdb;
 var objectdb;
 
 function Pouchbaser(objectdbName, blockchaindbName) {
-    objectdb = new PouchDB('./db/'+objectdbName+'_'+ global.localBot.botID);
-    blockdb = new PouchDB('./db/'+blockchaindbName +'_'+ global.localBot.botID);
 
-    var remoteObjectDB = new PouchDB(global.cfg.database.remoteServerURL + global.cfg.database.remoteObjectDB);
-    var remoteBlockDB = new PouchDB(global.cfg.database.remoteServerURL + global.cfg.database.remoteBlockchainDB);
+    objectdb = new PouchDB(__dirname+'/db/'+objectdbName+'_'+ global.localBot.botID);
+    blockdb = new PouchDB(__dirname+'/db/'+blockchaindbName +'_'+ global.localBot.botID);
 
-  //  objectdb.sync(remoteObjectDB, { live: true });
-  //  blockdb.sync(remoteBlockDB, { live: true });
+    if (global.dbSync) {
+      blockdb.sync(new PouchDB(global.cfg.database.remoteServerURL + global.cfg.database.remoteBlockchainDB), { live: true })
+        .catch(function (err) {
+          console.log('Blockdb sync error - ' + err);
+        });
+    }
 
     bus.eventBus.on(HISTMGR_POUCHBASER_BACKUP_OBJ, function (data) { backupElement(data); });
     bus.eventBus.on(HISTMGR_POUCHBASER_BACKUP_BLK, function (data) { backupElement(data); });

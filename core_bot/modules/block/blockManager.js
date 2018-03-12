@@ -62,7 +62,7 @@ function launchRandomBlock() {
   var threshold = global.cfg.trxPerBlock;
   // A block needs to use X transactions to be submitted
   if (global.transactionsMap.size < threshold) {
-    logger.log(LOG_BLK, 'Not enough available transactions' + global.transactionsMap.size + '/' + threshold + ')');
+    logger.log(LOG_BLK, 'Not enough available transactions (' + global.transactionsMap.size + '/' + threshold + ')');
     // Not enough transactions to created a block, restart the generation
     setTimeout(function() {
       launchRandomBlock();
